@@ -2,7 +2,7 @@ FROM alpine:3.10.2
 
 RUN \
 	apk update apk upgrade && \
-	apk add --no-cache --update gcc make \
+	apk add --update gcc make \
 		git musl-dev libexecinfo-dev openssl-dev \
 		freetype-dev glfw-dev \
 	&& \
@@ -14,3 +14,5 @@ RUN \
 	rm -rf /tmp/* /var/tmp/* /var/cache/apk/* \
 	&& \
 	/opt/v/v -v
+WORKDIR /opt/v
+CMD [ "sh" ]
