@@ -9,4 +9,4 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag v-alpine:at_v_commit_$(git -C $p ls-remote --exit-code https://github.com/vlang/v -h refs/heads/master | cut -f 1)
+      run: docker build . --file Dockerfile --tag v-alpine:at_v_commit_$(git ls-remote --exit-code https://github.com/vlang/v -h refs/heads/master | cut -f 1)
