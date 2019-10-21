@@ -11,4 +11,4 @@ jobs:
     - name: Build the Docker image
       run: |
         export v_hash=$(git -C $p ls-remote --exit-code https://github.com/vlang/v -h refs/heads/master | cut -f 1)
-        docker build . --file Dockerfile --tag v-alpine:at_v_commit_$v_hash_$(date +%s)
+        docker build . --file Dockerfile --tag v-alpine:at_v_commit_${v_hash}
