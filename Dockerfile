@@ -14,6 +14,6 @@ RUN \
 
 WORKDIR /opt/v
 
-RUN ./v symlink && v test $(find -type f -not -wholename './vlib/math/math_test.v' -name '*_test.v')
+RUN ./v symlink && VFLAGS="-show_c_cmd -g -debug -stats" v test $(find -type f -not -wholename './vlib/math/math_test.v' -name '*_test.v')
 
 CMD [ "sh" ]
