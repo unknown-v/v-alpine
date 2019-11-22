@@ -13,7 +13,7 @@ RUN \
 	rm -rf /tmp/* /var/tmp/* /var/cache/apk/* && /opt/v/v -v
 
 WORKDIR /opt/v
-
-RUN ./v symlink && VFLAGS="-show_c_cmd -g -debug -stats" v test $(find -type f -not -wholename './vlib/math/math_test.v' -name '*_test.v')
+ENV VFLAGS="-show_c_cmd -g -debug -stats"
+RUN ./v symlink && v up && v test $(find -type f -not -wholename './vlib/math/math_test.v' -name '*_test.v')
 
 CMD [ "sh" ]
