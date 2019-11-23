@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+# SOURCE_BRANCH: the name of the branch or the tag that is currently being tested.
+# SOURCE_COMMIT: the SHA1 hash of the commit being tested.
+# COMMIT_MSG: the message from the commit being tested and built.
+# DOCKER_REPO: the name of the Docker repository being built.
+# DOCKERFILE_PATH: the dockerfile currently being built.
+# DOCKER_TAG: the Docker repository tag being built.
+# IMAGE_NAME: the name and tag of the Docker repository being built. (This variable is a combination of DOCKER_REPO:DOCKER_TAG.)
+echo "------ HOOK START - BUILD -------"
+# printenv
+
+
+
+ [ "${SOURCE_BRANCH:0:12}" == "at_v_commit-" ] && SHA="${SOURCE_BRANCH:12}"
+
+
+docker_repo=unknownvuser/v-alpine:$SHA 
+ echo "date: '`date -u +"%d.%m.%Y-%H:%M:%S_%Z"`' - chash: '$SHA'"
+#DOCKER_TAG=at_v_commit-57fbf0b8a9d34cc9aebdb507889bca9e71864886
+#SOURCE_BRANCH=at_v_commit-57fbf0b8a9d34cc9aebdb507889bca9e71864886
+#GIT_BRANCH=at_v_commit-57fbf0b8a9d34cc9aebdb507889bca9e71864886
+time docker build --build-arg buildtime_chash=$SHA \
+	--build-arg maxdepth=250 \
+	-f "Dockerfile" -t $IMAGE_NAME --no-cache . && echo moon || echo unmoon
+# docker build --build-arg BUILD_DATE=`date -u +"%d.%m.%Y-%H:%M:%S_%Z"` --build-arg VCS_REF=$SOURCE_COMMIT --build-arg VCS_REF=$SOURCE_BRANCH -t $IMAGE_NAME .
+
+echo "------ HOOK END - BUILD -------"
