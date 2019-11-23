@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 # SOURCE_BRANCH: the name of the branch or the tag that is currently being tested.
 # SOURCE_COMMIT: the SHA1 hash of the commit being tested.
 # COMMIT_MSG: the message from the commit being tested and built.
