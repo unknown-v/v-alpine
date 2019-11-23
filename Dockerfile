@@ -7,7 +7,7 @@ LABEL Version="0.0.1"
 ARG buildtime_chash
 ENV chash=${buildtime_chash}
 
-ARG maxdepth=101
+ARG maxdepth=1
 ENV Maxdepth=${maxdepth}
 
 RUN echo "date: '`date -u +"%d.%m.%Y-%H:%M:%S_%Z"`' - chash: '$chash' - '${SOURCE_BRANCH:12}'"
@@ -36,12 +36,7 @@ RUN \
 	&& git clone --depth $((behind + 5)) --quiet https://github.com/vlang/vc \
 	#tests
 	&& a=$(git -C vc log -$((behind + 5)) --format="%H %B%n") \
-	# && idx=0 ; for i in $(git -C vc log -$((behind + 5)) --format='%H %B%n'); do echo $idx - $i ; idx=$((idx + 1)); done \
-	# && for v in $(echo "$a" | sed  's/ update from master -//g' | tr ' ' '-') ; do echo  "${v:0:40} : ${v:41}" ; done \
 	&& idx=0 ; for v in $(echo "$a" | tr ' ' '-') ; do [ "${chash:0:7}" == "${v:62:7}" ] && echo "### boom ###" && x=${v:0:40} ; done \
-	# && for item in ${d[@]} ; do \
-	# [ "${chash:0:7}" == "${item:0:7}" ] && echo "### boom ###" ; \
-	# done \
 	\
 	&& echo "$x" && [ -n "$x" ] && git -C ./vc reset --hard "HEAD~$behind" || git -C ./vc reset --hard "$x" \
 	#
@@ -57,7 +52,6 @@ RUN \
 
 # start test now ! 
 # ENV VFLAGS="-show_c_cmd -g"
-RUN /opt/v/v symlink && v test v && \
-	v test $(find /opt/v -type f -not -wholename '/opt/v/vlib/math/math_test.v' -name '*_test.v')
+RUN /opt/v/v symlink 
 
 CMD [ "sh" ]

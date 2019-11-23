@@ -7,7 +7,7 @@
 # DOCKER_TAG: the Docker repository tag being built.
 # IMAGE_NAME: the name and tag of the Docker repository being built. (This variable is a combination of DOCKER_REPO:DOCKER_TAG.)
 echo "------ HOOK START - pre-push -------"
-printenv
+#printenv
 
 echo "SOURCE_BRANCH  : $SOURCE_BRANCH"
 echo "SOURCE_COMMIT  : $SOURCE_COMMIT"

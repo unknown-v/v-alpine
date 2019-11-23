@@ -7,7 +7,7 @@
 # DOCKER_TAG: the Docker repository tag being built.
 # IMAGE_NAME: the name and tag of the Docker repository being built. (This variable is a combination of DOCKER_REPO:DOCKER_TAG.)
 echo "------ HOOK START - pre-build -------"
-printenv
+#printenv
 
 echo "SOURCE_BRANCH  : $SOURCE_BRANCH"
 echo "SOURCE_COMMIT  : $SOURCE_COMMIT"
@@ -16,5 +16,22 @@ echo "DOCKER_REPO    : $DOCKER_REPO"
 echo "DOCKERFILE_PATH: $DOCKERFILE_PATH"
 echo "DOCKER_TAG     : $DOCKER_TAG"
 echo "IMAGE_NAME     : $IMAGE_NAME"
+
+#output
+# SOURCE_BRANCH : at_v_commit-57fbf0b8a9d34cc9aebdb507889bca9e71864886
+# SOURCE_COMMIT : 888042cdc4831e8a8b63a74cf8f02fcfcfc61850
+# COMMIT_MSG : hooks test
+# Signed-off-by: unknown-v <UnknownVuser@protonmail.com>
+# DOCKER_REPO : index.docker.io/unknownvuser/v-alpine
+# DOCKERFILE_PATH: Dockerfile
+# DOCKER_TAG : at_v_commit-57fbf0b8a9d34cc9aebdb507889bca9e71864886
+# IMAGE_NAME : index.docker.io/unknownvuser/v-alpine:at_v_commit-57fbf0b8a9d34cc9aebdb507889bca9e71864886
+
+
+# [[ "$x" == "at_v_commit-"* ]] && "echo ${x:12}"
+
+
+[[ "$SOURCE_BRANCH" == "at_v_commit-"* ]] && echo "${SOURCE_BRANCH:12}"
+
 
 echo "------ HOOK END - pre-build -------"
