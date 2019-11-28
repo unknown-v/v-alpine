@@ -14,6 +14,6 @@ RUN \
 	
 WORKDIR /opt/v
 
-RUN ./v test $(find ${PWD} -type f -not -wholename '/opt/v/vlib/math/math_test.v' -name '*_test.v')
-
+# RUN ./v test $(find ${PWD} -type f -not -wholename '/opt/v/vlib/math/math_test.v' -name '*_test.v')
+RUN  ./v test v && ./v -v
 CMD [ "sh" ]
